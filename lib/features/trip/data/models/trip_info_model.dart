@@ -10,6 +10,14 @@ class TripInfoModel {
     required this.durationText,
     required this.durationValue,
   });
+  static TripInfoModel empty() {
+    return TripInfoModel(
+      distanceText: "",
+      distanceValue: 0,
+      durationText: "",
+      durationValue: 0,
+    );
+  }
 
   factory TripInfoModel.fromJson(Map<String, dynamic> json) {
     final element = json['rows'][0]['elements'][0];
