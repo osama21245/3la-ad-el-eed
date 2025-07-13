@@ -6,31 +6,25 @@ import 'package:_3la_ad_el_eed/features/trip/view/widgets/trip_Screen_body.dart'
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class TripScreen extends StatelessWidget {
   TripScreen({super.key});
 
-  final Set<Polyline> _polyline = {};
+  // final Set<Polyline> _polyline = {};
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<TripCubitCubit>(
       create:
-          (_) =>
-              TripCubitCubit(tripService<TripRepository>())
-                ..getTripInfo(_polyline),
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'Trip details',
-            style: TextStyle(color: Colors.blue[700]),
-          ),
-          centerTitle: true,
-        ),
-
-        body: TripScreenBody(),
-      ),
+          (_) => TripCubitCubit(tripService<TripRepository>())..getTripInfo(),
+      child: Scaffold(appBar: tripAppBar(), body: TripScreenBody()),
     );
   }
+}
+
+AppBar tripAppBar() {
+  return AppBar(
+    title: Text('Trip details', style: TextStyle(color: Colors.blue[700])),
+    centerTitle: true,
+  );
 }
