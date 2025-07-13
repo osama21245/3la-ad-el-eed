@@ -17,7 +17,8 @@ class CustomContainer extends StatelessWidget {
         leading: Icon(icon, color: Colors.blue[800]),
         title: Text(
           text,
-          style: TextStyle(fontSize: 10, fontWeight: FontWeight.w900),
+          style: TextStyle(fontSize: 12, fontWeight: FontWeight.w900),
+          textAlign: TextAlign.justify,
         ),
       ),
     );

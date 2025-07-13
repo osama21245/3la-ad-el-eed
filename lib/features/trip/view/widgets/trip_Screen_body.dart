@@ -9,31 +9,25 @@ class TripScreenBody extends StatelessWidget {
   const TripScreenBody({super.key});
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Trip details', style: TextStyle(color: Colors.blue[700])),
-        centerTitle: true,
-      ),
-      body: BlocBuilder<TripCubitCubit, TripInfoState>(
-        builder: (context, state) {
-          final tripCubit = context.read<TripCubitCubit>();
-          return Stack(
-            children: [
-              GoogleMapWidget(
-                origin: tripCubit.getLatLng(tripCubit.origin),
-                destination: tripCubit.getLatLng(tripCubit.destination),
-              ),
+    return BlocBuilder<TripCubitCubit, TripInfoState>(
+      builder: (context, state) {
+        final tripCubit = context.read<TripCubitCubit>();
+        return Stack(
+          children: [
+            GoogleMapWidget(
+              origin: tripCubit.getLatLng(tripCubit.origin),
+              destination: tripCubit.getLatLng(tripCubit.destination),
+            ),
 
-              TripInfoWidget(
-                distance: "distance:${state.tripInfoModel!.distanceText}",
-                distanceIcon: Icons.route,
-                duration: "duration:${state.tripInfoModel!.durationText}",
-                durationIcon: Icons.access_time,
-              ),
-            ],
-          );
-        },
-      ),
+            TripInfoWidget(
+              distance: "distance\n ${state.tripInfoModel!.distanceText}",
+              distanceIcon: Icons.route,
+              duration: "duration\n ${state.tripInfoModel!.durationText}",
+              durationIcon: Icons.access_time,
+            ),
+          ],
+        );
+      },
     );
   }
 }

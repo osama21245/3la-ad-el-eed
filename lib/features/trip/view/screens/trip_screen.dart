@@ -20,7 +20,17 @@ class TripScreen extends StatelessWidget {
           (_) =>
               TripCubitCubit(tripService<TripRepository>())
                 ..getTripInfo(_polyline),
-      child: TripScreenBody(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            'Trip details',
+            style: TextStyle(color: Colors.blue[700]),
+          ),
+          centerTitle: true,
+        ),
+
+        body: TripScreenBody(),
+      ),
     );
   }
 }

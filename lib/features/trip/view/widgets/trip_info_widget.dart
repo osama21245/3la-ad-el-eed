@@ -24,7 +24,7 @@ class TripInfoWidget extends StatelessWidget {
       child: Row(
         children: [
           Expanded(child: CustomContainer(text: distance, icon: distanceIcon)),
-          SizedBox(width: 7),
+          SizedBox(width: 10),
           Expanded(child: CustomContainer(text: duration, icon: durationIcon)),
         ],
       ),
