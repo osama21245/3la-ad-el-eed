@@ -24,6 +24,14 @@ File? selectedImage;
 
 class _AddProductState extends State<AddProduct> {
   @override
+  void dispose() {
+    nameController.dispose();
+    descriptionController.dispose();
+    priceController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
 
@@ -51,7 +59,6 @@ class _AddProductState extends State<AddProduct> {
             if (state.isLoading) {
               return const Center(child: CircularProgressIndicator());
             }
-
             return SingleChildScrollView(
               padding: const EdgeInsets.all(16),
               child: Form(

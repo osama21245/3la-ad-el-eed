@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-import '../../../../core/helpers/image_converter.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 abstract class AddProductRemoteDataSource {
   Future<void> addProduct({
@@ -14,8 +13,13 @@ abstract class AddProductRemoteDataSource {
 
 class AddProductRemoteDataSourceImpl implements AddProductRemoteDataSource {
   final FirebaseFirestore firestore;
+  final FirebaseStorage storage;
 
-  AddProductRemoteDataSourceImpl({required this.firestore});
+  AddProductRemoteDataSourceImpl({
+    required this.firestore,
+    required this.storage,
+  });
+
   @override
   Future<void> addProduct({
     required String name,
@@ -23,13 +27,19 @@ class AddProductRemoteDataSourceImpl implements AddProductRemoteDataSource {
     required String price,
     required File imageFile,
   }) async {
-    final imageBase64 = await convertImageToBase64(imageFile);
+    final ref = storage
+        .ref()
+        .child('product_images')
+        .child(imageFile.path.split('/').last);
+    await ref.putFile(imageFile);
 
-    await FirebaseFirestore.instance.collection('products').add({
+    final imageUrl = await ref.getDownloadURL();
+
+    await firestore.collection('products').add({
       'name': name,
       'description': description,
       'price': price,
-      'imageBase64': imageBase64, // saved as a string
+      'imageUrl': imageUrl,
     });
   }
 }

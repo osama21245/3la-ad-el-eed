@@ -23,43 +23,92 @@ class _ImagePickerFieldState extends State<ImagePickerField> {
     }
   }
 
+  void showImageSourceDialog() {
+    showModalBottomSheet(
+      context: context,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      builder:
+          (_) => Padding(
+            padding: const EdgeInsets.all(16),
+            child: Wrap(
+              children: [
+                ListTile(
+                  leading: Icon(Icons.photo_library),
+                  title: Text("Choose from Gallery"),
+                  onTap: () {
+                    Navigator.pop(context);
+                    pickImage(ImageSource.gallery);
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.camera_alt),
+                  title: Text("Take a Photo"),
+                  onTap: () {
+                    Navigator.pop(context);
+                    pickImage(ImageSource.camera);
+                  },
+                ),
+              ],
+            ),
+          ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.sizeOf(context);
-    return Column(
-      children: [
-        if (selectedImage != null)
-          Image.file(
-            selectedImage!,
-            height: size.height*0.15,
-            width: double.infinity,
-            fit: BoxFit.fill,
-          )
-        else
-          Container(
-            height: size.height*0.15,
-            width: double.infinity,
-            color: Colors.grey[200],
-            alignment: Alignment.center,
-            child: Text("No image selected"),
-          ),
-        SizedBox(height: 10),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final screenWidth = MediaQuery.of(context).size.width;
+        final imageHeight = screenWidth > 600 ? 250.0 : 180.0;
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            ElevatedButton.icon(
-              onPressed: () => pickImage(ImageSource.gallery),
-              icon: Icon(Icons.photo_library),
-              label: Text("Gallery"),
+            GestureDetector(
+              onTap: showImageSourceDialog,
+              child: Container(
+                height: imageHeight,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey.shade400),
+                  borderRadius: BorderRadius.circular(12),
+                  color: Colors.grey.shade100,
+                  image:
+                      selectedImage != null
+                          ? DecorationImage(
+                            image: FileImage(selectedImage!),
+                            fit: BoxFit.fill,
+                          )
+                          : null,
+                ),
+                child:
+                    selectedImage == null
+                        ? Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Icon(Icons.image, size: 40, color: Colors.grey),
+                              SizedBox(height: 8),
+                              Text("Tap to select an image"),
+                            ],
+                          ),
+                        )
+                        : null,
+              ),
             ),
-            ElevatedButton.icon(
-              onPressed: () => pickImage(ImageSource.camera),
-              icon: Icon(Icons.camera_alt),
-              label: Text("Camera"),
-            ),
+            if (selectedImage != null) ...[
+              SizedBox(height: 12),
+              Center(
+                child: TextButton.icon(
+                  onPressed: showImageSourceDialog,
+                  icon: Icon(Icons.edit, size: 20),
+                  label: Text("Change Image"),
+                ),
+              ),
+            ],
           ],
-        ),
-      ],
+        );
+      },
     );
   }
 }
