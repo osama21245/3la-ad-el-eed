@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:_3la_ad_el_eed/features/shops/data/data_source/shops_remote_datasource.dart';
 import 'package:_3la_ad_el_eed/features/shops/data/models/shop.dart';
 import 'package:dartz/dartz.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class ShopsRepository {
   final ShopsRemoteDataSource remoteDataSource;
@@ -30,4 +33,17 @@ class ShopsRepository {
       return left(e.toString());
     }
   }
+
+  Future<Either<String,String>> uploadImage(File file) async {
+    try {
+      final fileName = DateTime.now().millisecondsSinceEpoch.toString();
+      final ref = FirebaseStorage.instance.ref().child('shops_images/$fileName');
+      await ref.putFile(file);
+      return right(await ref.getDownloadURL());
+    } catch (e) {
+      return left("Image upload failed: $e");
+    }
+  }
+
+
 }

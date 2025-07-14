@@ -16,7 +16,7 @@ class ShopsRemoteDataSource {
     return querySnapshot;
   }
   Future<void>addShop(Shop shop)async{
-    await shops.add({shop.toJson()});
+    await shops.add(shop.toJson());
   }
 
 }

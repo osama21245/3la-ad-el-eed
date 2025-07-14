@@ -30,7 +30,7 @@ class ShowShopsScreen extends StatelessWidget {
   }
 }
 List<Shop>shops =[
-  Shop(id: '1', name: 'Lotfy', address: '12 Al-Horrya St', phone: '01234567891', email: "", website: ""),
-  Shop(id: '1', name: 'Ganoby', address: '12 Al-Horrya St', phone: '01234567891', email: "", website: ""),
+  Shop(id: '1', name: 'Lotfy', address: '12 Al-Horrya St', phone: '01234567891', email: "", website: "",image: '',description: '',category: ''),
+  Shop(id: '1', name: 'Ganoby', address: '12 Al-Horrya St', phone: '01234567891', email: "", website: "",image: '',description: '',category: ''),
 
 ];
