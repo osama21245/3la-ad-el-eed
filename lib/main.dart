@@ -1,7 +1,7 @@
-import 'package:_3la_ad_el_eed/features/shops/view/screens/add_product.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'core/di/dependency_injection.dart';
+import 'features/shops/view/screens/show_products.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -18,7 +18,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const AddProduct(),
+      debugShowCheckedModeBanner: false,
+      home: const ShowProducts(),
     );
   }
 }
