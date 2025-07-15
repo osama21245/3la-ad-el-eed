@@ -36,11 +36,9 @@ class ShopsRepository {
 
   Future<Either<String,String>> uploadImage(File file) async {
     try {
-      final fileName = DateTime.now().millisecondsSinceEpoch.toString();
-      final ref = FirebaseStorage.instance.ref().child('shops_images/$fileName');
-      await ref.putFile(file);
-      return right(await ref.getDownloadURL());
-    } catch (e) {
+    return right(await remoteDataSource.uploadImage(file));
+    }
+    catch (e) {
       return left("Image upload failed: $e");
     }
   }
