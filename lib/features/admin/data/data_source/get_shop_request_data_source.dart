@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 abstract interface class GetShopRequestDataSource {
   Future<List<Map<String, dynamic>>> getShopRequest();
 }
