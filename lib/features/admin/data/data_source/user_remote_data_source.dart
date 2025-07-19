@@ -19,7 +19,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   Future<bool> isUserBlocked(String userId) async {
     final doc = await firestore.collection('users').doc(userId).get();
     if (doc.exists) {
-      return doc.data()?['isBlocked'] == true;
+      return doc.data()?['is_blocked'] == true;
     }
     return false;
   }
