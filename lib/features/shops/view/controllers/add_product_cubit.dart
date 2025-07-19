@@ -7,7 +7,8 @@ class AddProductCubit extends Cubit<AddProductState> {
   // final ShopsRepository shopsRepository;
   final ShopsRepository shopsRepository;
 
-  AddProductCubit({required this.shopsRepository}): super(AddProductState(status: AddProductStatus.initial));
+  AddProductCubit({required this.shopsRepository})
+    : super(AddProductState(status: AddProductStatus.initial));
   //   : super(AddProductState(status: AddProductStatus.initial));
   //
   // Future<void> getShops() async {
@@ -28,6 +29,8 @@ class AddProductCubit extends Cubit<AddProductState> {
     required String description,
     required String price,
     required File imageBase64,
+    required String shopId,
+    required String userId,
   }) async {
     emit(state.copyWith(status: AddProductStatus.loading));
     try {
@@ -36,6 +39,8 @@ class AddProductCubit extends Cubit<AddProductState> {
         description: description,
         price: price,
         imageFile: imageBase64,
+        shopId: shopId,
+        userId: userId,
       );
       emit(state.copyWith(status: AddProductStatus.success));
     } catch (e) {

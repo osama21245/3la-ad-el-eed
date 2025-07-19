@@ -1,3 +1,6 @@
+import 'package:_3la_ad_el_eed/features/admin/data/data_source/user_remote_data_source.dart';
+import 'package:_3la_ad_el_eed/features/admin/data/repository/user_repository.dart';
+import 'package:_3la_ad_el_eed/features/admin/view/controllers/block_user_cubit.dart';
 import 'package:_3la_ad_el_eed/features/shops/data/data_source/shops_remote_datasource.dart';
 import 'package:_3la_ad_el_eed/features/shops/data/repository/shops_repository.dart';
 import 'package:_3la_ad_el_eed/features/shops/view/controllers/add_product_cubit.dart';
@@ -24,8 +27,17 @@ void intl() {
     () => AddProductCubit(shopsRepository: sl<ShopsRepository>()),
   );
   //Show product cubit
-
   sl.registerLazySingleton<ShowProductCubit>(
     () => ShowProductCubit(shopRepository: sl<ShopsRepository>()),
+  );
+  //User
+  sl.registerLazySingleton<UserRemoteDataSource>(
+    () => UserRemoteDataSourceImpl(firestore: FirebaseFirestore.instance),
+  );
+  sl.registerLazySingleton<UserRepository>(
+    () => UserRepositoryImpl(remoteDataSource: sl<UserRemoteDataSource>()),
+  );
+  sl.registerLazySingleton<BlockUserCubit>(
+    () => BlockUserCubit(userRepository: sl<UserRepository>()),
   );
 }

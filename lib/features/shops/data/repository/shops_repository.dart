@@ -7,29 +7,37 @@ abstract class ShopsRepository {
     required String description,
     required String price,
     required File imageFile,
+    required String shopId,
+    required String userId,
   });
 
   Future<List<Map<String, dynamic>>> fetchProducts();
-
 }
 
-class ShopsRepositoryImpl implements  ShopsRepository{
+class ShopsRepositoryImpl implements ShopsRepository {
   ShopsRemoteDataSource remoteDataSource;
   ShopsRepositoryImpl({required this.remoteDataSource});
   @override
-  Future<void> addProduct({required String name, required String description, required String price, required File imageFile}) {
+  Future<void> addProduct({
+    required String name,
+    required String description,
+    required String price,
+    required File imageFile,
+    required String shopId,
+    required String userId,
+  }) {
     return remoteDataSource.addProduct(
       name: name,
       description: description,
       price: price,
       imageFile: imageFile,
+      shopId: shopId,
+      userId: userId,
     );
   }
 
   @override
   Future<List<Map<String, dynamic>>> fetchProducts() {
     return remoteDataSource.fetchProducts();
-
   }
-
 }

@@ -1,3 +1,5 @@
+import 'package:_3la_ad_el_eed/features/admin/view/screens/block_user.dart';
+import 'package:_3la_ad_el_eed/features/shops/view/screens/add_product.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'core/di/dependency_injection.dart';
@@ -19,7 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const ShowProducts(),
+      home: const BlockUser(),
     );
   }
 }

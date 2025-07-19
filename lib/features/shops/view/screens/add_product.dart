@@ -123,6 +123,8 @@ class _AddProductState extends State<AddProduct> {
                             description: descriptionController.text.trim(),
                             price: priceController.text.trim(),
                             imageBase64: selectedImage!,
+                            shopId: 'n2W0vTrpDYdc70rpyTWq',
+                            userId: '4iUxe2xwauPYSe7KcRzM19ylaF32',
                           );
                         }
                       },
