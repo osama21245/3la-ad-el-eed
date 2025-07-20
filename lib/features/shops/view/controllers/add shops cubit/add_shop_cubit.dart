@@ -21,35 +21,67 @@ class AddShopCubit extends Cubit<AddShopState> {
     );
   }
 
-  Future<void> addShopWithImage(File imageFile, Shop shop) async {
+  Future<void> addShopWithImages({
+    required Shop shop,
+    required File shopImage,
+    required File nationalIDImage,
+    required File commercialRegistrationCertificateImage,
+    required File taxIdentificationCertificateImage,
+    required File businessLicenseImage,
+    required File bankAccountDetailsImage,
+  }) async {
     emit(state.copyWith(status: AddShopStatus.loading));
 
-    final imageUrlResult = await shopsRepository.uploadImage(imageFile);
+    try {
+      String? shopImageUrl;
+      String? nationalIDImageUrl;
+      String? commercialRegistrationUrl;
+      String? taxCertificateUrl;
+      String? businessLicenseUrl;
+      String? bankAccountUrl;
 
-    imageUrlResult.fold(
-          (failure) {
-        emit(state.copyWith(status: AddShopStatus.error, errorMessage: failure));
-      },
-          (url) async {
-        final shopWithImage = Shop(
-          category: shop.category,
-          description: shop.description,
-          id: shop.id,
-          image: url,
-          name: shop.name,
-          address: shop.address,
-          phone: shop.phone,
-          email: shop.email,
-          website: shop.website,
-        );
+        shopImageUrl = await shopsRepository.remoteDataSource.uploadImage(shopImage);
 
-        final result = await shopsRepository.addShop(shopWithImage);
-        result.fold(
-              (failure) => emit(state.copyWith(status: AddShopStatus.error, errorMessage: failure)),
-              (_) => emit(state.copyWith(status: AddShopStatus.success)),
-        );
-      },
-    );
+        nationalIDImageUrl = await shopsRepository.remoteDataSource.uploadImage(nationalIDImage);
+
+        commercialRegistrationUrl = await shopsRepository.remoteDataSource.uploadImage(commercialRegistrationCertificateImage);
+
+        taxCertificateUrl = await shopsRepository.remoteDataSource.uploadImage(taxIdentificationCertificateImage);
+
+        businessLicenseUrl = await shopsRepository.remoteDataSource.uploadImage(businessLicenseImage);
+
+        bankAccountUrl = await shopsRepository.remoteDataSource.uploadImage(bankAccountDetailsImage);
+
+
+      final updatedShop = Shop(
+        adminRejectionReasonMessage: shop.adminRejectionReasonMessage,
+        requestStatus: shop.requestStatus,
+        id: shop.id,
+        name: shop.name,
+        address: shop.address,
+        phone: shop.phone,
+        email: shop.email,
+        website: shop.website,
+        category: shop.category,
+        description: shop.description,
+        shopPassword: shop.shopPassword,
+        shopImage: shopImageUrl,
+        nationalIDImage: nationalIDImageUrl,
+        commercialRegistrationCertificateImage: commercialRegistrationUrl,
+        taxIdentificationCertificateImage: taxCertificateUrl,
+        businessLicenseImage: businessLicenseUrl,
+        bankAccountDetailsImage: bankAccountUrl,
+      );
+
+      final result = await shopsRepository.addShop(updatedShop);
+
+      result.fold(
+            (failure) => emit(state.copyWith(status: AddShopStatus.error, errorMessage: failure)),
+            (_) => emit(state.copyWith(status: AddShopStatus.success)),
+      );
+    } catch (e) {
+      emit(state.copyWith(status: AddShopStatus.error, errorMessage: e.toString()));
+    }
   }
 
 }

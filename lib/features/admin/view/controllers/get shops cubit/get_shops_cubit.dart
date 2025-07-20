@@ -1,5 +1,6 @@
+import 'package:_3la_ad_el_eed/features/admin/data/respository/shops_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:_3la_ad_el_eed/features/shops/data/repository/shops_repository.dart';
+
 import 'get_shops_state.dart';
 
 class GetShopsCubit extends Cubit<GetShopsState> {
@@ -28,4 +29,5 @@ class GetShopsCubit extends Cubit<GetShopsState> {
       ),
     );
   }
+
 }

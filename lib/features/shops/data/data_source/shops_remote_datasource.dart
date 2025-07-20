@@ -5,21 +5,20 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:_3la_ad_el_eed/features/shops/data/models/shop.dart';
 import 'package:_3la_ad_el_eed/firebase_options.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:http/http.dart' as http;
+
 
 class ShopsRemoteDataSource {
-  // Future<List<Map<String, dynamic>>> getShops() async {
-  //   final response = await http.get(Uri.parse('https://api.example.com/shops'));
-  //   return response.body as List<Map<String, dynamic>>;
-  // }
-  final CollectionReference shops = FirebaseFirestore.instance.collection('shop category request');
-  Future<QuerySnapshot> getShops()async{
 
-    QuerySnapshot querySnapshot = await shops.get();
-    return querySnapshot;
-  }
+  final CollectionReference shopsRequests = FirebaseFirestore.instance.collection('shop category request');
   Future<void>addShop(Shop shop)async{
-    await shops.add(shop.toJson());
+    // final user = FirebaseAuth.instance.currentUser;
+    // final docRef = shopsRequests.doc(user.uid);  (when adding a new shop , the id of this shop will the same as the current user)
+    final docRef = shopsRequests.doc();
+
+    final shopWithIdAndEmail = shop.toJson()
+      ..addAll({'id': docRef.id,'email' :'hassanhany@gmail.com'});
+    await docRef.set(shopWithIdAndEmail);
+
   }
 
   Future<String> uploadImage(File file) async {

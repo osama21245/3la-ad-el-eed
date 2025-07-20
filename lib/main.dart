@@ -1,24 +1,11 @@
-// import 'package:_3la_ad_el_eed/features/shops/view/screens/add_shop.dart';
-// import 'package:_3la_ad_el_eed/features/shops/view/screens/show_shops.dart';
-// import 'package:flutter/material.dart';
-// import 'package:firebase_core/firebase_core.dart';
-//
-// void main()async{
-//   WidgetsFlutterBinding.ensureInitialized();
-//   await Firebase.initializeApp();
-//   runApp(DeleiveryApp());
-// }
-// class DeleiveryApp extends StatelessWidget {
-//   const DeleiveryApp({super.key});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       home: AddShopScreen(),
-//     );
-//   }
-// }
+import 'package:_3la_ad_el_eed/features/admin/view/screens/shops_addition_requests_screen.dart';
+import 'package:_3la_ad_el_eed/features/shops/view/screens/add_shop.dart';
+import 'package:_3la_ad_el_eed/features/user/view/screens/reviewing_result_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+
+
+
 
 
 

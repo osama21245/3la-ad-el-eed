@@ -1,4 +1,4 @@
-// add_shop_state.dart
+// delete_your_rejected_request_state.dart
 
 enum AddShopStatus { initial, loading, success, error }
 

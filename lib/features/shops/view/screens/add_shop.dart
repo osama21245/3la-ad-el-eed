@@ -13,7 +13,7 @@ class AddShopScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(providers: [
-      BlocProvider(create: (context)=>PickImageCubit()),
+
       BlocProvider(create: (context)=>AddShopCubit(shopsRepository: ShopsRepository(remoteDataSource: ShopsRemoteDataSource()))),
     ],
       child: Scaffold(

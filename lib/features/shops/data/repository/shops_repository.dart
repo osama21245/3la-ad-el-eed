@@ -10,19 +10,6 @@ class ShopsRepository {
 
   ShopsRepository({required this.remoteDataSource});
 
-  Future<Either<String, List<Shop>>> getShops() async {
-    try {
-      final snapshot = await remoteDataSource.getShops();
-      List<Shop> shops = [];
-      for (var doc in snapshot.docs) {
-        shops.add(Shop.fromJson(doc.data() as Map<String, dynamic>));
-      }
-      return right(shops);
-    } on Exception catch (e) {
-      print(e);
-      return left(e.toString());
-    }
-  }
 
   Future<Either<String, Unit>> addShop(Shop shop) async {
     try {

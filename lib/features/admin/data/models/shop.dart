@@ -40,7 +40,7 @@ class Shop {
   factory Shop.fromJson(Map<String, dynamic> json) {
     return Shop(
 
-        adminRejectionReasonMessage:json['adminRejectionReasonMessage'] ,
+      adminRejectionReasonMessage:json['adminRejectionReasonMessage'] ,
         requestStatus: json['requestStatus'],
         bankAccountDetailsImage: json['bankAccountDetailsImage'],
         businessLicenseImage: json['commercialRegistrationCertificateImage'],

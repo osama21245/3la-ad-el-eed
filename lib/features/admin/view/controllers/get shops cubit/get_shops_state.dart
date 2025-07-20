@@ -1,5 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:_3la_ad_el_eed/features/shops/data/models/shop.dart';
+
+
+import 'package:_3la_ad_el_eed/features/admin/data/models/shop.dart';
 
 enum GetShopsStatus { initial, loading, success, error }
 

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class AddShopSelectCategoryDropDownMenu extends StatelessWidget {
   AddShopSelectCategoryDropDownMenu({super.key,required this.onCategoryPicked});
 
-  final List<String> categories = ['Sport', 'Grocery', 'Restaurants','Convenience','Pharmacy'];
+  final List<String> categories = ['Sport', 'Grocery', 'Restaurants','Convenience','Pharmacy','other'];
 String? newValue;
   final Function(String) onCategoryPicked;
   @override

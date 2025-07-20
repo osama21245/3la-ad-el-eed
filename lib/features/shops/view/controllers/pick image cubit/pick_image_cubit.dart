@@ -8,7 +8,7 @@ class PickImageCubit extends Cubit<PickImageState>{
   pickImage()async{
     emit(PickImageLoading());
    try {
-     final picked =await ImagePicker().pickImage(source: ImageSource.camera);
+     final picked =await ImagePicker().pickImage(source: ImageSource.gallery);
       if(picked!=null){
          final image = File(picked.path);
          emit(PickImageSuccess(image));}
