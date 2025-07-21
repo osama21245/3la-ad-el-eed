@@ -1,5 +1,6 @@
 import 'package:_3la_ad_el_eed/features/auth/ui/cubit/auth_cubit.dart';
 import 'package:_3la_ad_el_eed/features/auth/ui/cubit/auth_state.dart';
+import 'package:_3la_ad_el_eed/features/auth/ui/screens/login_screen.dart';
 import 'package:_3la_ad_el_eed/features/auth/ui/widgets/custom_text_form_field.dart';
 import 'package:_3la_ad_el_eed/features/auth/ui/widgets/general_auth_button.dart';
 import 'package:_3la_ad_el_eed/features/auth/ui/widgets/welcom_text.dart';
@@ -14,129 +15,211 @@ class SignUpScreen extends StatelessWidget {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController phoneNumber = TextEditingController();
+  GlobalKey<FormState> globalKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AuthCubit(),
-      child: Scaffold(
-        // Using Manual {backgroundColor} Until Make Application Theming
-        backgroundColor: Color(0xFFE4E7EA),
-        body: Padding(
-          padding: const EdgeInsets.only(left: 10, right: 10, top: 90),
-          child: Form(
-            child: SingleChildScrollView(
-              child: Column(
-                spacing: 10,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Center(child: TopTitle(title: 'Sign up')),
+    return Scaffold(
+      // Using Manual {backgroundColor} Until Make Application Theming
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        surfaceTintColor: Colors.white,
 
-                  // Using SizedBox For Spaceing Until Create Space Tool
-                  SizedBox(height: 10),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: CustomTextFormField(
-                      controller: firsName,
-                      lableText: "First name",
-                    ),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios_new_rounded, color: Colors.black),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        title: Text(
+          "Back",
+          style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.only(left: 20, right: 20, top: 0),
+        child: Form(
+          key: globalKey,
+          child: SingleChildScrollView(
+            child: Column(
+              spacing: 10,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 30,
                   ),
-                  SizedBox(height: 15),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: CustomTextFormField(
-                      controller: lastName,
-                      lableText: "Last name",
-                    ),
-                  ),
-                  SizedBox(height: 15),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: CustomTextFormField(
-                      controller: email,
-                      lableText: "Email",
-                    ),
-                  ),
-                  SizedBox(height: 15),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: CustomTextFormField(
+                  child: TopTitle(title: 'Create a new account'),
+                ),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(horizontal: 10),
+                //   child: CustomTextFormField(
+                //     controller: firsName,
+                //     hintText: "First name",
+                //     validator: (val) {
+                //       return context.read<AuthCubit>().validInput(
+                //         "First name",
+                //         firsName.text,
+                //         2,
+                //         20,
+                //       );
+                //     },
+                //   ),
+                // ),
+                // SizedBox(height: 15),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(horizontal: 10),
+                //   child: CustomTextFormField(
+                //     validator: (val) {
+                //       return context.read<AuthCubit>().validInput(
+                //         "Last name",
+                //         lastName.text,
+                //         2,
+                //         20,
+                //       );
+                //     },
+                //     controller: lastName,
+                //     hintText: "Last name",
+                //   ),
+                // ),
+                // SizedBox(height: 15),
+                CustomTextFormField(
+                  controller: email,
+                  hintText: "Email",
+
+                  validator: (val) {
+                    return context.read<AuthCubit>().validInput(
+                      "Email",
+                      email.text,
+                      9,
+                      50,
+                    );
+                  },
+                ),
+                SizedBox(height: 15),
+                BlocBuilder<AuthCubit, AuthState>(
+                  builder: (context, state) {
+                    return CustomTextFormField(
+                      validator: (val) {
+                        return context.read<AuthCubit>().validInput(
+                          "Password",
+                          password.text,
+                          8,
+                          50,
+                        );
+                      },
                       controller: password,
-                      lableText: "Password",
-                    ),
-                  ),
-                  SizedBox(height: 15),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: CustomTextFormField(
-                      controller: phoneNumber,
-                      lableText: "Phone number",
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  BlocBuilder<AuthCubit, AuthState>(
-                    builder: (context, state) {
-                      return GeneralAuthButton(
-                        email: email,
-                        password: password,
-                        buttonChild:
-                            state is AuthLoadingState
-                                ? CircularProgressIndicator(color: Colors.white)
-                                : Text(
-                                  "Sign Up",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
+                      hintText: "Password",
+                      isObscureText: state.isObscureText,
+                      suffixIcon: GestureDetector(
                         onTap: () {
-                          context.read<AuthCubit>().signup(
-                            email: email.text,
-                            password: password.text,
-                            phoneNumber: phoneNumber.text,
-                            userName: "$firsName $lastName",
-                          );
-                          // Using {Normal Navigator} For Navigation Until Create Navigation Tool
-                          Navigator.of(context).pop();
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                "${firsName.text} Account Has Been Created",
-                              ),
-                            ),
+                          context.read<AuthCubit>().togglePasswordVisibility(
+                            state.isObscureText,
                           );
                         },
-                      );
-                    },
-                  ),
-                  SizedBox(height: 15),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Alreadt have account?",
-                        style: TextStyle(color: Theme.of(context).hintColor),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          // Using {Normal Navigator} For Navigation Until Create Navigation Tool
-                          Navigator.pop(context);
-                        },
-                        child: Text(
-                          "Log in",
-                          style: TextStyle(color: Theme.of(context).hintColor),
+                        child: Icon(
+                          state.isObscureText
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                          color: Colors.grey,
+                          size: 23,
                         ),
                       ),
-                    ],
-                  ),
-                  SizedBox(height: 35),
-                  Text(
-                    "By signing up, you agree to our Terms of Service and Privacy Policy.",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: Theme.of(context).hintColor),
-                  ),
-                  SizedBox(height: 10),
-                ],
-              ),
+                    );
+                  },
+                ),
+
+                // SizedBox(height: 15),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(horizontal: 10),
+                //   child: CustomTextFormField(
+                //     controller: phoneNumber,
+                //     hintText: "Phone number",
+                //     validator: (val) {
+                //       return context.read<AuthCubit>().validInput(
+                //         "Phone number",
+                //         phoneNumber.text,
+                //         11,
+                //         15,
+                //       );
+                //     },
+                //   ),
+                // ),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.3),
+
+                BlocBuilder<AuthCubit, AuthState>(
+                  builder: (context, state) {
+                    return GeneralAuthButton(
+                      buttonColor:
+                          email.text.isNotEmpty && password.text.isNotEmpty
+                              ? Color(0xFF194661)
+                              : Colors.grey.shade300,
+                      email: email,
+                      password: password,
+                      buttonChild:
+                          state is AuthLoadingState
+                              ? CircularProgressIndicator(color: Colors.white)
+                              : Text(
+                                "Sign Up",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                      onTap:
+                          email.text.isNotEmpty && password.text.isNotEmpty
+                              ? () async {
+                                if (globalKey.currentState!.validate()) {
+                                  await context.read<AuthCubit>().signup(
+                                    context: context,
+                                    email: email.text,
+                                    password: password.text,
+                                  );
+                                }
+                                // Using {Normal Navigator} For Navigation Until Create Navigation Tool
+                              }
+                              : () {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      "Please Enter Your Email And Password",
+                                    ),
+                                  ),
+                                );
+                              },
+                    );
+                  },
+                ),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Alreadt have account?",
+                      style: TextStyle(color: Theme.of(context).hintColor),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        // Using {Normal Navigator} For Navigation Until Create Navigation Tool
+                        Navigator.pop(context);
+                      },
+                      child: Text(
+                        "Log in",
+                        style: TextStyle(color: Theme.of(context).hintColor),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 5),
+                Text(
+                  "By signing up, you agree to our Terms of Service and Privacy Policy.",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Theme.of(context).hintColor),
+                ),
+                SizedBox(height: 10),
+              ],
             ),
           ),
         ),

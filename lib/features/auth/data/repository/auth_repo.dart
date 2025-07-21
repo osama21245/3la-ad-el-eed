@@ -1,3 +1,4 @@
+import 'package:_3la_ad_el_eed/features/auth/data/models/user_model.dart';
 import 'package:_3la_ad_el_eed/features/auth/data/web_service/auth_web_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -10,12 +11,10 @@ class AuthRepoImpl implements AuthRepo {
     required String password,
   }) async {
     try {
-       await authWebService.signInWithEmailPass(
+      await authWebService.signInWithEmailPass(
         email: email,
         password: password,
       );
-
-
     } catch (e) {
       throw ">>>- Error When Login $e";
     }
@@ -25,17 +24,27 @@ class AuthRepoImpl implements AuthRepo {
   Future<UserCredential> signUpWithEmail({
     required String email,
     required String password,
-    required String userName,
   }) async {
     try {
       UserCredential userCredential = await authWebService.signUpWithEmailPass(
         email: email,
         password: password,
-        userName: userName,
       );
       return userCredential;
     } catch (e) {
       throw ">>> Error When CreateAccount $e";
+    }
+  }
+
+  @override
+  Future<UserModel> getCurrentUserData(String email) async {
+    Map<String, dynamic>? user = await authWebService.getCurrentUserData(
+      email: FirebaseAuth.instance.currentUser!.email!,
+    );
+    if (user != null) {
+      return UserModel.fromJson(user);
+    } else {
+      throw "User data not found";
     }
   }
 
@@ -56,12 +65,6 @@ class AuthRepoImpl implements AuthRepo {
   }
 
   @override
-  Future<Map<String, dynamic>?> getCurrentUserData(String email) {
-    // TODO: implement getCurrentUserData
-    throw UnimplementedError();
-  }
-
-  @override
   Future<void> signOut() {
     // TODO: implement signOut
     throw UnimplementedError();
@@ -78,12 +81,11 @@ abstract class AuthRepo {
   Future<UserCredential> signUpWithEmail({
     required String email,
     required String password,
-    required String userName,
   });
   // auth methods will needed
   Future emailVerify(User user);
   Future<void> forgetPassword({required String email});
-  Future<Map<String, dynamic>?> getCurrentUserData(String email);
+  Future<UserModel> getCurrentUserData(String email);
   Future<void> signOut();
   Future deleteUser();
 }

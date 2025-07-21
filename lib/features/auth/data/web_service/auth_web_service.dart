@@ -5,11 +5,13 @@ abstract interface class AuthWebService {
   Future<UserCredential> signUpWithEmailPass({
     required String email,
     required String password,
-    required String userName,
   });
   Future<void> signInWithEmailPass({
     required String email,
     required String password,
+  });
+  Future<Map<String, dynamic>?> getCurrentUserData({
+    required String email,
   });
 }
 
@@ -22,7 +24,6 @@ class AuthWebServiceImpl implements AuthWebService {
   Future<UserCredential> signUpWithEmailPass({
     required String email,
     required String password,
-    required String userName,
   }) async {
     try {
       // create account with emailPassword Firebase Auth
@@ -33,7 +34,6 @@ class AuthWebServiceImpl implements AuthWebService {
         "user_id": userCredential.user!.uid,
         "is_seller": 0,
         "is_send_shop_request": 0,
-        "user_name": userName,
         "email": email,
         "password": password,
       });
@@ -55,6 +55,26 @@ class AuthWebServiceImpl implements AuthWebService {
       );
     } catch (e) {
       throw ">>>> Error When Login With Email , Pass $e";
+    }
+  }
+
+  @override
+  Future<Map<String, dynamic>?> getCurrentUserData({
+    required String email,
+  }) async {
+    try {
+      // Fetch user data from Firestore based on email
+      return userCollection
+          .where("email", isEqualTo: email)
+          .get()
+          .then((snapshot) {
+            if (snapshot.docs.isNotEmpty) {
+              return snapshot.docs.first.data() as Map<String, dynamic>;
+            }
+            return null;
+          });
+    } catch (e) {
+      throw ">>> Error When Fetching User Data: $e";
     }
   }
 }

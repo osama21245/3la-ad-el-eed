@@ -7,8 +7,9 @@ class GeneralAuthButton extends StatelessWidget {
     required this.password,
     required this.buttonChild,
     required this.onTap,
+    required this.buttonColor,
   });
-
+final Color buttonColor ;
   final TextEditingController email;
   final TextEditingController password;
   final Widget buttonChild;
@@ -18,10 +19,10 @@ class GeneralAuthButton extends StatelessWidget {
     return GestureDetector(
       onTap:onTap,
       child: Container(
-        height: 46,
+        height: 52,
         decoration: BoxDecoration(
-          color: const Color.fromARGB(215, 255, 86, 34),
-          borderRadius: BorderRadius.circular(30),
+          color: buttonColor,
+          borderRadius: BorderRadius.circular(10),
         ),
         child: Center(child: buttonChild),
       ),

@@ -12,8 +12,8 @@ class ForgotPasswordButton extends StatelessWidget {
         ).showSnackBar(SnackBar(content: Text("This button Not Work Yet")));
       },
       child: Text(
-        "Forgot password?",
-        style: TextStyle(color: Theme.of(context).hintColor),
+        "forgot password",
+        style: TextStyle(color:  const Color.fromARGB(215, 255, 86, 34),fontWeight: FontWeight.w700),
       ),
     );
   }
