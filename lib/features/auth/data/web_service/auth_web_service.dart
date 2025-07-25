@@ -1,7 +1,9 @@
+import 'package:_3la_ad_el_eed/core/connection/check_internet_connection.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 abstract interface class AuthWebService {
+  Future<bool> isInternetConnected();
   Future<UserCredential> signUpWithEmailPass({
     required String email,
     required String password,
@@ -10,9 +12,7 @@ abstract interface class AuthWebService {
     required String email,
     required String password,
   });
-  Future<Map<String, dynamic>?> getCurrentUserData({
-    required String email,
-  });
+  Future<Map<String, dynamic>?> getCurrentUserData({required String email});
 }
 
 class AuthWebServiceImpl implements AuthWebService {
@@ -20,6 +20,7 @@ class AuthWebServiceImpl implements AuthWebService {
   CollectionReference userCollection = FirebaseFirestore.instance.collection(
     "users",
   );
+  CheckInternetConnection checkInternet = CheckInternetConnection();
   @override
   Future<UserCredential> signUpWithEmailPass({
     required String email,
@@ -64,17 +65,21 @@ class AuthWebServiceImpl implements AuthWebService {
   }) async {
     try {
       // Fetch user data from Firestore based on email
-      return userCollection
-          .where("email", isEqualTo: email)
-          .get()
-          .then((snapshot) {
-            if (snapshot.docs.isNotEmpty) {
-              return snapshot.docs.first.data() as Map<String, dynamic>;
-            }
-            return null;
-          });
+      return userCollection.where("email", isEqualTo: email).get().then((
+        snapshot,
+      ) {
+        if (snapshot.docs.isNotEmpty) {
+          return snapshot.docs.first.data() as Map<String, dynamic>;
+        }
+        return null;
+      });
     } catch (e) {
       throw ">>> Error When Fetching User Data: $e";
     }
+  }
+
+  @override
+  Future<bool> isInternetConnected()async {
+  return await checkInternet.checkConnection();
   }
 }

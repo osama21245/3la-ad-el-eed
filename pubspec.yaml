@@ -33,6 +33,7 @@ dependencies:
   cloud_firestore:
   flutter:
     sdk: flutter
+  internet_connection_checker: ^3.0.1
 
 dev_dependencies:
   firebase_core: ^3.15.1

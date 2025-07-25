@@ -1,18 +1,14 @@
+enum AuthStates { init, loading, success, fail }
+
 class AuthState {
+  final AuthStates authStates;
   final bool isObscureText;
-
-  AuthState({required this.isObscureText});
-}
-
-class AuthLoadingState extends AuthState {
-  AuthLoadingState() : super(isObscureText: true);
-}
-
-class AuthSuccessState extends AuthState {
-  AuthSuccessState() : super(isObscureText: true);
-}
-
-class AuthErrorState extends AuthState {
-  AuthErrorState({required this.errorMessage}) : super(isObscureText: true);
   final String errorMessage;
+  AuthState({required this.authStates, required this.isObscureText,required this.errorMessage});
+  AuthState copyWith({AuthStates? state, bool? isObscureText,String? errorMessage}) {
+    return AuthState(
+      authStates: state ?? this.authStates,
+      isObscureText: isObscureText ?? this.isObscureText, errorMessage:errorMessage??this.errorMessage,
+    );
+  }
 }

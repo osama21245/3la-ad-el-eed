@@ -23,7 +23,6 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void dispose() {
     super.dispose();
-
     email.dispose();
     password.dispose();
   }
@@ -37,150 +36,167 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Form(
           key: formKey,
           child: SingleChildScrollView(
-            child: Column(
-              spacing: 10,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SizedBox(
-                    width: 160,
-                    child: TopTitle(title: "Log in to your account"),
+            //Here Listener to make Navigate as emit state
+            child: BlocListener<AuthCubit, AuthState>(
+              listener: (context, state) {
+                if (state.authStates == AuthStates.fail) {
+                  ScaffoldMessenger.of(
+                    context,
+                  ).showSnackBar(SnackBar(content: Text(state.errorMessage)));
+                } else if (state.authStates == AuthStates.success) {
+                  // Temporary snackBar until complete home page;
+                  ScaffoldMessenger.of(
+                    context,
+                  ).showSnackBar(SnackBar(content: Text("Login Success")));
+                } else {
+                  //loading state
+                }
+              },
+              child: Column(
+                spacing: 10,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SizedBox(
+                      width: 160,
+                      child: TopTitle(title: "Log in to your account"),
+                    ),
                   ),
-                ),
 
-                // Using SizedBox For Spaceing Until Create Space Tool
-                SizedBox(height: 10),
-                CustomTextFormField(
-                  controller: email,
-                  hintText: "Email",
-                  validator: (val) {
-                    return context.read<AuthCubit>().validInput(
-                      "Email",
-                      email.text,
-                      9,
-                      50,
-                    );
-                  },
-                ),
-                SizedBox(height: 15),
-                BlocBuilder<AuthCubit, AuthState>(
-                  builder: (context, state) {
-                    return CustomTextFormField(
-                      validator: (val) {
-                        return context.read<AuthCubit>().validInput(
-                          "Password",
-                          password.text,
-                          8,
-                          50,
-                        );
-                      },
-                      controller: password,
-                      hintText: "Password",
-                      isObscureText: state.isObscureText,
-                      suffixIcon: GestureDetector(
-                        onTap: () {
-                          context.read<AuthCubit>().togglePasswordVisibility(
-                            state.isObscureText,
+                  // Using SizedBox For Spaceing Until Create Space Tool
+                  SizedBox(height: 10),
+                  CustomTextFormField(
+                    controller: email,
+                    hintText: "Email",
+                    validator: (val) {
+                      return context.read<AuthCubit>().validInput(
+                        "Email",
+                        email.text,
+                        9,
+                        50,
+                      );
+                    },
+                  ),
+                  SizedBox(height: 15),
+                  BlocBuilder<AuthCubit, AuthState>(
+                    builder: (context, state) {
+                      return CustomTextFormField(
+                        validator: (val) {
+                          return context.read<AuthCubit>().validInput(
+                            "Password",
+                            password.text,
+                            8,
+                            50,
                           );
                         },
-                        child: Icon(
-                          state.isObscureText
-                              ? Icons.visibility_off
-                              : Icons.visibility,
-                          color: Colors.grey,
-                          size: 23,
-                        ),
-                      ),
-                    );
-                  },
-                ),
-                Center(child: ForgotPasswordButton()),
-                SizedBox(height: MediaQuery.of(context).size.height * 0.25),
-                BlocBuilder<AuthCubit, AuthState>(
-                  builder: (context, state) {
-                    return GeneralAuthButton(
-                      buttonColor:
-                          email.text.isNotEmpty && password.text.isNotEmpty
-                              ? Color(0xFF194661)
-                              : Colors.grey.shade300,
-                      email: email,
-                      password: password,
-                      buttonChild:
-                          state is AuthLoadingState
-                              ? CircularProgressIndicator(color: Colors.white)
-                              : Text(
-                                "Log in",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                      onTap:
-                          email.text.isNotEmpty && password.text.isNotEmpty
-                              ? () async {
-                                if (formKey.currentState!.validate()) {
-                                  await context.read<AuthCubit>().login(
-                                    context: context,
-                                    email: email.text,
-                                    password: password.text,
-                                  );
-
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text("Login Successful")),
-                                  );
-                                }
-                              }
-                              : () {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                      "Please Enter Your Email And Password",
-                                    ),
-                                  ),
-                                );
-                              },
-                    );
-                  },
-                ),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Don't have an account?",
-                      style: TextStyle(color: Theme.of(context).hintColor),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        // Using {Normal Navigator} For Navigation Until Create Navigation Tool
-                        email.text = "";
-                        password.text = "";
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => SignUpScreen(),
+                        controller: password,
+                        hintText: "Password",
+                        isObscureText: state.isObscureText,
+                        suffixIcon: GestureDetector(
+                          onTap: () {
+                            context.read<AuthCubit>().togglePasswordVisibility(
+                              state.isObscureText,
+                            );
+                          },
+                          child: Icon(
+                            state.isObscureText
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                            color: Colors.grey,
+                            size: 23,
                           ),
-                        );
-                      },
-                      child: Text(
-                        "Sign up",
+                        ),
+                      );
+                    },
+                  ),
+                  Center(child: ForgotPasswordButton()),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.25),
+                  BlocBuilder<AuthCubit, AuthState>(
+                    builder: (context, state) {
+                      return GeneralAuthButton(
+                        buttonColor:
+                            email.text.isNotEmpty && password.text.isNotEmpty
+                                ? Color(0xFF194661)
+                                : Colors.grey.shade300,
+                        email: email,
+                        password: password,
+                        buttonChild:
+                            state.authStates == AuthStates.loading
+                                ? CircularProgressIndicator(color: Colors.white)
+                                : Text(
+                                  "Log in",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                        onTap:
+                            email.text.isNotEmpty && password.text.isNotEmpty
+                                ? () async {
+                                  if (formKey.currentState!.validate()) {
+                                    await context.read<AuthCubit>().login(
+                                      context: context,
+                                      email: email.text,
+                                      password: password.text,
+                                    );
+                                  }
+                                }
+                                : () {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        "Please Enter Your Email And Password",
+                                      ),
+                                    ),
+                                  );
+                                },
+                      );
+                    },
+                  ),
 
-                        style: TextStyle(
-                          textBaseline: TextBaseline.ideographic,
-                          fontSize: 14,
-                          decoration: TextDecoration.underline,
-                          decorationStyle: TextDecorationStyle.wavy,
-                          decorationColor: Colors.blue,
-                          height: 1.5,
-                          letterSpacing: 1,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Don't have an account?",
+                        style: TextStyle(color: Theme.of(context).hintColor),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          // Using {Normal Navigator} For Navigation Until Create Navigation Tool
+                          email.text = "";
+                          password.text = "";
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder:
+                                  (context) => BlocProvider(
+                                    create: (context) => AuthCubit(),
+                                    child: SignUpScreen(),
+                                  ),
+                            ),
+                          );
+                        },
+                        child: Text(
+                          "Sign up",
 
-                          color: Colors.black,
+                          style: TextStyle(
+                            textBaseline: TextBaseline.ideographic,
+                            fontSize: 14,
+                            decoration: TextDecoration.underline,
+                            decorationStyle: TextDecorationStyle.wavy,
+                            decorationColor: Colors.blue,
+                            height: 1.5,
+                            letterSpacing: 1,
+
+                            color: Colors.black,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),

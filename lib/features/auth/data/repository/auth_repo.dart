@@ -69,9 +69,16 @@ class AuthRepoImpl implements AuthRepo {
     // TODO: implement signOut
     throw UnimplementedError();
   }
+
+  @override
+  Future<bool> isInternetConnected() async{
+  return await  authWebService.isInternetConnected();
+  }
 }
 
 abstract class AuthRepo {
+  //checking internet connection
+  Future<bool> isInternetConnected();
   // method used in auth for login
   Future<void> loginWithEmail({
     required String email,
