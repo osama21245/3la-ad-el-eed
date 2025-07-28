@@ -1,5 +1,6 @@
 class Shop {
   final String? id;
+  final String? userID;
   final int? requestStatus;
   final String? shopImage;
   final String? nationalIDImage;
@@ -18,6 +19,7 @@ class Shop {
   final String? adminRejectionReasonMessage;
 
   Shop( {
+    required this.userID,
     required this.adminRejectionReasonMessage,
     required this.id,
     required this.requestStatus,
@@ -39,7 +41,7 @@ class Shop {
 
   factory Shop.fromJson(Map<String, dynamic> json) {
     return Shop(
-
+        userID:json['userID'],
         adminRejectionReasonMessage:json['adminRejectionReasonMessage'] ,
         requestStatus: json['requestStatus'],
         bankAccountDetailsImage: json['bankAccountDetailsImage'],
@@ -62,6 +64,7 @@ class Shop {
 
   Map<String, dynamic> toJson() {
     return {
+      'userID':userID,
       'requestStatus': requestStatus ,
       'adminRejectionReasonMessage' : adminRejectionReasonMessage,
       'shopImage': shopImage,

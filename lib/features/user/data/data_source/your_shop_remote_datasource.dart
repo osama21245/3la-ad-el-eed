@@ -1,16 +1,17 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 import '../models/shop.dart';
 
 class YourShopRemoteDataSource {
-
+final user =  FirebaseAuth.instance.currentUser;
   final CollectionReference shopsRequests = FirebaseFirestore.instance.collection('shop category request');
   Future<DocumentSnapshot> getYourShop()async{
 
-    QuerySnapshot querySnapshot = await shopsRequests.where('email' ,isEqualTo: 'hassanhany@gmail.com').get();
+    QuerySnapshot querySnapshot = await shopsRequests.where('userID' ,isEqualTo: user!.uid).get();
 
 
     return querySnapshot.docs.first;

@@ -22,6 +22,7 @@ class ChangeRequestStatusCubit extends Cubit<ChangeRequestStatusState> {
       },
       (_) {
         final updatedShop = Shop(
+          userID:shop.userID,
           id: shop.id,
           requestStatus: 1,
           shopImage: shop.shopImage,
@@ -59,6 +60,7 @@ class ChangeRequestStatusCubit extends Cubit<ChangeRequestStatusState> {
       adminMessage,
     );
     final updatedShop = Shop(
+      userID: shop.userID,
       id: shop.id,
       requestStatus: -1,
       shopImage: shop.shopImage,

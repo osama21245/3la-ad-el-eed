@@ -54,6 +54,7 @@ class AddShopCubit extends Cubit<AddShopState> {
 
 
       final updatedShop = Shop(
+        userID: shop.userID,
         adminRejectionReasonMessage: shop.adminRejectionReasonMessage,
         requestStatus: shop.requestStatus,
         id: shop.id,

@@ -198,6 +198,7 @@ class _AddShopFormWidgetState extends State<AddShopFormWidget> {
                           businessLicenseImage != null) {
                         setState(() {
                           final shop = Shop(
+                            userID: '',
                             adminRejectionReasonMessage: '',
                           requestStatus: 0,
                             id: '',
