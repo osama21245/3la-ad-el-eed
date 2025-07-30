@@ -12,5 +12,5 @@ abstract class GoggleMapApiStrings {
   static String departureTime = "departure_time";
   static String key = "key";
 
-  // static String ApiKey = "AIzaSyBEBg6ItImxrxhsGbv7G9KNyvy1gr2MGwo";
+  
 }
