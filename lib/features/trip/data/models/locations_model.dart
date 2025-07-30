@@ -1,12 +1,16 @@
-class LocationsModel {
-  final double originLatitude;
-  final double originLongitude;
-  final double destinationLatitude;
-  final double destinationLongitude;
-  LocationsModel({
-    required this.originLatitude,
-    required this.originLongitude,
-    required this.destinationLatitude,
-    required this.destinationLongitude,
-  });
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+class CurrentLocationsModel {
+  final double longitude;
+  final double latitude;
+
+  CurrentLocationsModel({required this.longitude, required this.latitude});
+
+  factory CurrentLocationsModel.fromJson(Map<String, dynamic> data) {
+    return CurrentLocationsModel(
+      latitude: (data['latitude'] as num).toDouble(),
+      longitude: (data['longitude'] as num).toDouble(),
+    );
+  }
+  LatLng toLatLng() => LatLng(latitude, longitude);
 }
