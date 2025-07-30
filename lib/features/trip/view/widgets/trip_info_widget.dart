@@ -18,7 +18,7 @@ class TripInfoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      bottom: 100,
+      bottom: 60,
       left: 10,
       right: 10,
       child: Row(
