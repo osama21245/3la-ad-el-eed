@@ -1,11 +1,16 @@
-import 'package:_3la_ad_el_eed/core/service_locator.dart';
+import 'package:_3la_ad_el_eed/core/services/service_locator.dart';
 import 'package:_3la_ad_el_eed/features/trip/view/screens/trip_screen.dart';
+import 'package:_3la_ad_el_eed/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
+
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   setupServiceLocator();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
   runApp(const MyApp());
 }
 
