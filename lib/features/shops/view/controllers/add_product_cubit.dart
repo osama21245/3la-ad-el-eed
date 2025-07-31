@@ -1,23 +1,50 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'dart:io';
 import 'package:_3la_ad_el_eed/features/shops/data/repository/shops_repository.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'add_product_state.dart';
 
 class AddProductCubit extends Cubit<AddProductState> {
+  // final ShopsRepository shopsRepository;
   final ShopsRepository shopsRepository;
 
   AddProductCubit({required this.shopsRepository})
     : super(AddProductState(status: AddProductStatus.initial));
+  //   : super(AddProductState(status: AddProductStatus.initial));
+  //
+  // Future<void> getShops() async {
+  //   emit(state.copyWith(status: AddProductStatus.loading));
+  //
+  //   try {
+  //     final shops = await shopsRepository.getShops();
+  //     emit(state.copyWith(status: AddProductStatus.success, shops: shops));
+  //   } catch (error) {
+  //     emit(
+  //       state.copyWith(status: AddProductStatus.error, error: error.toString()),
+  //     );
+  //   }
+  // }
 
-  Future<void> getShops() async {
+  Future<void> addProduct({
+    required String name,
+    required String description,
+    required String price,
+    required File imageBase64,
+    required String shopId,
+    required String userId,
+  }) async {
     emit(state.copyWith(status: AddProductStatus.loading));
-
     try {
-      final shops = await shopsRepository.getShops();
-      emit(state.copyWith(status: AddProductStatus.success, shops: shops));
-    } catch (error) {
-      emit(
-        state.copyWith(status: AddProductStatus.error, error: error.toString()),
+      await shopsRepository.addProduct(
+        name: name,
+        description: description,
+        price: price,
+        imageFile: imageBase64,
+        shopId: shopId,
+        userId: userId,
       );
+      emit(state.copyWith(status: AddProductStatus.success));
+    } catch (e) {
+      emit(state.copyWith(status: AddProductStatus.error, error: e.toString()));
     }
   }
 }
