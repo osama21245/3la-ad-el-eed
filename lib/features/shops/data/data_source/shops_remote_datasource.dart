@@ -1,6 +1,4 @@
 //example
-
-import 'package:_3la_ad_el_eed/features/shops/data/models/shop.dart';
 import 'package:http/http.dart' as http;
 
 class ShopsRemoteDataSource {
