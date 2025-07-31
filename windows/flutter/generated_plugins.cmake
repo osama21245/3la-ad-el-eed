@@ -3,6 +3,12 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+ add_product
+  cloud_firestore
+  file_selector_windows
+  firebase_core
+  firebase_storage
+
  add_shop
   cloud_firestore
   connectivity_plus
@@ -12,6 +18,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
   firebase_storage
 
   firebase_core
+ development
  development
 )
 

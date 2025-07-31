@@ -1,4 +1,7 @@
 class Shop {
+ add_product
+  final String id;
+
  add_shop
   final String? id;
   final String? userID;
@@ -12,11 +15,17 @@ class Shop {
 
   final String id;
  development
+ development
   final String name;
   final String address;
   final String phone;
   final String email;
   final String website;
+ add_product
+
+  Shop({
+    required this.id,
+
  add_shop
   final String category;
   final String description;
@@ -38,21 +47,27 @@ class Shop {
   Shop({
     required this.id,
  development
+ development
     required this.name,
     required this.address,
     required this.phone,
     required this.email,
     required this.website,
+ add_product
+
  add_shop
     required this.category,
     required this.description,
     required this.shopPassword
 
  development
+ development
   });
 
   factory Shop.fromJson(Map<String, dynamic> json) {
     return Shop(
+ add_product
+
  add_shop
         userID:json['userID'],
         adminRejectionReasonMessage:json['adminRejectionReasonMessage'] ,
@@ -73,18 +88,24 @@ class Shop {
         description: json['description'],
         shopPassword: json['shopPassword']
 
+ development
       id: json['id'],
       name: json['name'],
       address: json['address'],
       phone: json['phone'],
       email: json['email'],
       website: json['website'],
+ add_product
+
+ development
  development
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
+ add_product
+
  add_shop
       'userID':userID,
       'requestStatus': requestStatus ,
@@ -98,16 +119,20 @@ class Shop {
       'shopPassword' : shopPassword,
 
  development
+ development
       'id': id,
       'name': name,
       'address': address,
       'phone': phone,
       'email': email,
       'website': website,
+ add_product
+
  add_shop
       'category':category,
       'description': description,
 
+ development
  development
     };
   }

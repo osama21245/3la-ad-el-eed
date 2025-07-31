@@ -1,9 +1,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+ add_product
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
 
     <!-- 🔥 ضروري للإشعارات على Android 13+ -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
+ development
     <application
+        android:requestLegacyExternalStorage="true"
         android:label="_3la_ad_el_eed"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
