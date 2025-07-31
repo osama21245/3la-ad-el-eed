@@ -1,4 +1,5 @@
 class Shop {
+ add_shop
   final String? id;
   final String? userID;
   final int? requestStatus;
@@ -8,11 +9,15 @@ class Shop {
   final String? taxIdentificationCertificateImage;
   final String? businessLicenseImage;
   final String? bankAccountDetailsImage;
+
+  final String id;
+ development
   final String name;
   final String address;
   final String phone;
   final String email;
   final String website;
+ add_shop
   final String category;
   final String description;
   final String shopPassword;
@@ -29,18 +34,26 @@ class Shop {
     required this.taxIdentificationCertificateImage,
     required this.businessLicenseImage,
     required this.bankAccountDetailsImage,
+
+  Shop({
+    required this.id,
+ development
     required this.name,
     required this.address,
     required this.phone,
     required this.email,
     required this.website,
+ add_shop
     required this.category,
     required this.description,
     required this.shopPassword
+
+ development
   });
 
   factory Shop.fromJson(Map<String, dynamic> json) {
     return Shop(
+ add_shop
         userID:json['userID'],
         adminRejectionReasonMessage:json['adminRejectionReasonMessage'] ,
         requestStatus: json['requestStatus'],
@@ -59,11 +72,20 @@ class Shop {
         category: json['category'],
         description: json['description'],
         shopPassword: json['shopPassword']
+
+      id: json['id'],
+      name: json['name'],
+      address: json['address'],
+      phone: json['phone'],
+      email: json['email'],
+      website: json['website'],
+ development
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
+ add_shop
       'userID':userID,
       'requestStatus': requestStatus ,
       'adminRejectionReasonMessage' : adminRejectionReasonMessage,
@@ -74,14 +96,19 @@ class Shop {
       'businessLicenseImage': businessLicenseImage,
       'bankAccountDetailsImage': bankAccountDetailsImage,
       'shopPassword' : shopPassword,
+
+ development
       'id': id,
       'name': name,
       'address': address,
       'phone': phone,
       'email': email,
       'website': website,
+ add_shop
       'category':category,
       'description': description,
+
+ development
     };
   }
 }

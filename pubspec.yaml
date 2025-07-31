@@ -55,7 +55,11 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
+ add_shop
 
+
+  flutter_bloc: ^9.1.1
+ development
   firebase_core: ^3.15.1
   http: ^1.4.0
 

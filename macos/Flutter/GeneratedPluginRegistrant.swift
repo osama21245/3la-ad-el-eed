@@ -5,6 +5,7 @@
 import FlutterMacOS
 import Foundation
 
+ add_shop
 import cloud_firestore
 import connectivity_plus
 import file_selector_macos
@@ -21,4 +22,10 @@ func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
   FLTFirebaseCorePlugin.register(with: registry.registrar(forPlugin: "FLTFirebaseCorePlugin"))
   FLTFirebaseMessagingPlugin.register(with: registry.registrar(forPlugin: "FLTFirebaseMessagingPlugin"))
   FLTFirebaseStoragePlugin.register(with: registry.registrar(forPlugin: "FLTFirebaseStoragePlugin"))
+
+import firebase_core
+
+func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
+  FLTFirebaseCorePlugin.register(with: registry.registrar(forPlugin: "FLTFirebaseCorePlugin"))
+ development
 }
