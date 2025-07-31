@@ -1,4 +1,4 @@
-import 'package:_3la_ad_el_eed/features/shops/view/widgets/shop_item_widget.dart';
+import 'package:_3la_ad_el_eed/features/admin/view/widgets/shop_item_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../../data/models/shop.dart';
@@ -10,27 +10,29 @@ class ShowShopsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        title: Text('Shops',style: TextStyle(
+        title: Text('Popular Categories',style: TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.w700,
           fontFamily: "PlusJakartaSans",
           color: Color(0xff171212),
         ),
         ),
-        centerTitle: true,
+
       ),
       backgroundColor: Colors.white,
-      body: ListView.builder(
-          itemCount:shops.length ,
-          itemBuilder:(context,i)=> Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ShopItemWidget(shop: shops[i]),
-          )),
+      body: Column(
+        children: [
+          Expanded(
+            child: GridView.builder(
+                gridDelegate:SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+                itemCount:4 ,
+                itemBuilder:(context,i)=> Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: SizedBox(),
+                )),
+          ),
+        ],
+      ),
     );
   }
 }
-List<Shop>shops =[
-  Shop(id: '1', name: 'Lotfy', address: '12 Al-Horrya St', phone: '01234567891', email: "", website: ""),
-  Shop(id: '1', name: 'Ganoby', address: '12 Al-Horrya St', phone: '01234567891', email: "", website: ""),
-
-];

@@ -6,15 +6,18 @@ class CustomTextFormField extends StatelessWidget {
     required this.hintText,
     required this.backgroundColor,
     required this.validator,
-    required this.controller
+    required this.controller,
+    this.maxLines
   });
   String? Function(String?)? validator;
   TextEditingController? controller;
   Color backgroundColor;
   String hintText;
+  int? maxLines = 1;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      maxLines: maxLines,
 controller: controller,
       validator: validator,
       decoration: InputDecoration(
