@@ -8,8 +8,11 @@ enum ShopLocationStates {
   getCurrantLocationFailure,
   getShopLocationSelect,
   selectShopLocationOnMap,
+  cameraMoved,
   searchPlaces,
+  searchPlacesLoading,
   changeSelectMode,
+  animationResult,
 }
 
 class ShopLocationState {
@@ -19,6 +22,7 @@ class ShopLocationState {
   final Set<Marker> shopMark;
   final String errorMessage;
   final List<PredictionModel> predictions;
+  final LatLng searchResultPosition;
 
   const ShopLocationState({
     required this.state,
@@ -27,6 +31,8 @@ class ShopLocationState {
     required this.shopMark,
     required this.errorMessage,
     required this.predictions,
+
+    required this.searchResultPosition,
   });
   ShopLocationState copyWith({
     ShopLocationStates? state,
@@ -35,6 +41,7 @@ class ShopLocationState {
     Set<Marker>? shopMark,
     String? errorMessage,
     List<PredictionModel>? predictions,
+    LatLng? searchResultPosition,
   }) {
     return ShopLocationState(
       state: state ?? this.state,
@@ -43,6 +50,7 @@ class ShopLocationState {
       shopMark: shopMark ?? this.shopMark,
       errorMessage: errorMessage ?? this.errorMessage,
       predictions: predictions ?? this.predictions,
+      searchResultPosition: searchResultPosition ?? this.searchResultPosition,
     );
   }
 }

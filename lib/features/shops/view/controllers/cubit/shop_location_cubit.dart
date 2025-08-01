@@ -12,7 +12,12 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 class ShopLocationCubit extends Cubit<ShopLocationState> {
   final MapRepoImpl mapRepoImpl;
   AssetMapBitmap? _markIcon;
-  // final LatLng _egypt = LatLng(30.033333, 31.233334);
+   GoogleMapController? _mapController;
+
+  void setMapController(GoogleMapController controller) {
+    _mapController = controller;
+  }
+
   ShopLocationCubit(this.mapRepoImpl)
     : super(
         ShopLocationState(
@@ -22,6 +27,7 @@ class ShopLocationCubit extends Cubit<ShopLocationState> {
           shopMark: {},
           errorMessage: '',
           predictions: [],
+          searchResultPosition: LatLng(30.033333, 31.233334),
         ),
       );
   Future<void> getCurrantLocation() async {
@@ -71,6 +77,7 @@ class ShopLocationCubit extends Cubit<ShopLocationState> {
   }
 
   Future searchPlaces({required String query}) async {
+    emit(state.copyWith(state: ShopLocationStates.searchPlacesLoading));
     final List<PredictionModel> predictions = await mapRepoImpl
         .placeAutocomlate(query: query);
     emit(
@@ -78,9 +85,19 @@ class ShopLocationCubit extends Cubit<ShopLocationState> {
         state: ShopLocationStates.searchPlaces,
         predictions: predictions,
       ),
-    
     );
-      
+  }
+
+  Future getLatLngFromPlaceId({
+    required String placeId,
+    required BuildContext context,
+  }) async {
+    final LatLng searchResultLatLng = await mapRepoImpl.getLatLngFromPlaceId(
+      placeId: placeId,
+    );
+    
+    Navigator.pop(context);
+    
   }
 
   void changeSelectMode(LocationSelectMode selectedMode, Set<Marker> markes) {

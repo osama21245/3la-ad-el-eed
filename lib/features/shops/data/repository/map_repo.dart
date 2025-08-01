@@ -2,6 +2,7 @@ import 'package:_3la_ad_el_eed/features/shops/data/data_source/map_data_source.d
 import 'package:_3la_ad_el_eed/features/shops/data/models/search_places_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
 abstract class MapRepo {
@@ -11,6 +12,7 @@ abstract class MapRepo {
   Future<bool> requestEnableLocationService();
   Future<Either<String, Position>> getCurrantLocation();
   Future<List<PredictionModel>> placeAutocomlate({required String query});
+  Future<LatLng> getLatLngFromPlaceId({required String placeId});
 }
 
 class MapRepoImpl implements MapRepo {
@@ -89,5 +91,17 @@ class MapRepoImpl implements MapRepo {
     final data = await mapDataSource.placeAutocomlate(query: query);
     var predictions = data.map((e) => PredictionModel.fromJson(e)).toList();
     return predictions;
+  }
+
+  @override
+  Future<LatLng> getLatLngFromPlaceId({required String placeId}) async {
+    final data = await mapDataSource.getLatLngFromPlaceId(placeId: placeId);
+
+    final location = data['result']['geometry']['location'];
+    final LatLng searchResultPosition = LatLng(
+      location['lat'],
+      location['lng'],
+    );
+    return searchResultPosition;
   }
 }

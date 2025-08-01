@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: BlocProvider(
         create: (context) => sl<ShopLocationCubit>(),
-        child: const GetShopLocationScreen(),
+        child:  GetShopLocationScreen(),
       ),
     );
   }
