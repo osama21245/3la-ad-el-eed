@@ -1,4 +1,4 @@
-import 'package:_3la_ad_el_eed/features/trip/data/models/trip_info_model.dart';
+import 'package:_3la_ad_el_eed/features/trip/data/models/direction_route_moder.dart';
 
 enum TripInfoStatus { initial, loading, success, error }
 
@@ -11,19 +11,23 @@ extension TripInfoStateExtension on TripInfoState {
 
 final class TripInfoState {
   final TripInfoStatus status;
-  final TripInfoModel? tripInfoModel;
+  final DirectionModel directionModel;
   final String? errorMessage;
 
-  TripInfoState({required this.status, this.errorMessage, this.tripInfoModel});
+  TripInfoState({
+    required this.status,
+    this.errorMessage,
+    required this.directionModel,
+  });
 
   TripInfoState copyWith({
     TripInfoStatus? status,
-    TripInfoModel? tripInfoModel,
+    DirectionModel? directionModel,
     String? errorMessage,
   }) {
     return TripInfoState(
       status: status ?? this.status,
-      tripInfoModel: tripInfoModel ?? this.tripInfoModel,
+      directionModel: directionModel ?? this.directionModel,
       errorMessage: errorMessage ?? this.errorMessage,
     );
   }
