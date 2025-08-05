@@ -3,6 +3,11 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+ create_trip
+  cloud_firestore
+  firebase_core
+  geolocator_windows
+
  add_product
   cloud_firestore
   file_selector_windows
@@ -18,6 +23,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
   firebase_storage
 
   firebase_core
+ development
  development
  development
 )

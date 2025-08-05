@@ -28,8 +28,21 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  cloud_firestore: ^5.6.11
+  cupertino_icons: ^1.0.8
+  data_connection_checker_tv: ^0.3.5-nullsafety
+  dio: ^5.8.0+1
+  firebase_core: ^3.15.2
   flutter:
     sdk: flutter
+ create_trip
+  flutter_bloc: ^9.1.1
+  flutter_polyline_points: ^2.1.0
+  geocoding: ^4.0.0
+  geolocator: ^14.0.2
+  get_it: ^8.0.3
+  google_maps_flutter: ^2.12.3
+
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -53,10 +66,10 @@ dependencies:
   firebase_auth: ^5.7.0
   internet_connection_checker: ^3.0.1
  development
+ development
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
+  firebase_core: ^3.15.1
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -64,6 +77,10 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
+ create_trip
+  flutter_test:
+    sdk: flutter
+
  add_shop
 
 
@@ -72,11 +89,11 @@ dev_dependencies:
 
  development
   firebase_core: ^3.15.1
+ development
   http: ^1.4.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
 # The following section is specific to Flutter packages.
 flutter:
 
@@ -84,18 +101,18 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/
-  #   - images/a_dot_ham.jpeg
+ create_trip
+    - assets/delivery.png
 
+    - assets/images/
+ development
+  #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
-
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/to/asset-from-package
-
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a
