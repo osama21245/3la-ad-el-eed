@@ -23,7 +23,7 @@ controller: controller,
       decoration: InputDecoration(
         fillColor: backgroundColor,
         filled: true,
-        hint: Text(hintText),
+        hintText: hintText,
         hintStyle: TextStyle(
           fontFamily: 'PlusJakartaSans',
           fontWeight: FontWeight.w400,

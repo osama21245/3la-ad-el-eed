@@ -5,9 +5,10 @@ import 'package:_3la_ad_el_eed/features/auth/ui/widgets/custom_text_form_field.d
 import 'package:_3la_ad_el_eed/features/auth/ui/widgets/forgot_password_button.dart';
 import 'package:_3la_ad_el_eed/features/auth/ui/widgets/general_auth_button.dart';
 import 'package:_3la_ad_el_eed/features/auth/ui/widgets/welcom_text.dart';
-import 'package:_3la_ad_el_eed/features/shops/view/screens/add_shop.dart';
 import 'package:_3la_ad_el_eed/features/user/view/screens/reviewing_result_screen.dart';
+// ignore: depend_on_referenced_packages
 import 'package:flutter/material.dart';
+// ignore: depend_on_referenced_packages
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // ignore: must_be_immutable

@@ -1,4 +1,4 @@
-import 'package:_3la_ad_el_eed/features/admin/data/models/shop.dart';
+// ignore: depend_on_referenced_packages
 import 'package:flutter/material.dart';
 class ShopImageItem extends StatelessWidget {
   const ShopImageItem({super.key,required this.image,required this.title});

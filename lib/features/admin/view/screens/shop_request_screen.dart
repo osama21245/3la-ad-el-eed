@@ -1,19 +1,19 @@
-
-
-import 'package:_3la_ad_el_eed/features/admin/data/data_source/shops_remote_datasource.dart';
+// ignore: depend_on_referenced_packages
+import 'package:flutter/material.dart';
+// ignore: depend_on_referenced_packages
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:_3la_ad_el_eed/features/admin/data/data_source/admin_shops_remote_datasource.dart';
 import 'package:_3la_ad_el_eed/features/admin/data/models/shop.dart';
-import 'package:_3la_ad_el_eed/features/admin/data/respository/shops_repository.dart';
+import 'package:_3la_ad_el_eed/features/admin/data/repository/admin_shops_repo.dart';
 import 'package:_3la_ad_el_eed/features/admin/view/controllers/change%20request%20status%20cubit/change_request_status_cubit.dart';
-import 'package:_3la_ad_el_eed/features/admin/view/controllers/change%20request%20status%20cubit/change_request_status_state.dart';
 import 'package:_3la_ad_el_eed/features/admin/view/controllers/get%20shop%20by%20Id/get_shop_by_id_cubit.dart';
 import 'package:_3la_ad_el_eed/features/admin/view/controllers/get%20shop%20by%20Id/get_shop_by_id_state.dart';
 import 'package:_3la_ad_el_eed/features/admin/view/screens/clarify_rejection_screen.dart';
 import 'package:_3la_ad_el_eed/features/admin/view/widgets/shop_data_widget.dart';
+import 'package:_3la_ad_el_eed/features/shops/data/data_source/add_shop_remote_datasource.dart';
+import 'package:_3la_ad_el_eed/features/shops/data/repository/add_shop_repository.dart';
 import 'package:_3la_ad_el_eed/features/shops/view/widgets/custom_button.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../widgets/shop_info_row.dart';
 
 class ShopRequestScreen extends StatelessWidget {
   const ShopRequestScreen({super.key,required this.shop});
@@ -21,8 +21,8 @@ final Shop shop ;
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(providers: [
-      BlocProvider( create: (context)=> GetShopByIDCubit(shopsRepository: ShopsRepository(remoteDataSource: ShopsRemoteDataSource()))..getShopByID(shop.id!),),
-      BlocProvider(create: (context)=>ChangeRequestStatusCubit(ShopsRepository(remoteDataSource: ShopsRemoteDataSource())),)
+      BlocProvider( create: (context)=> GetShopByIDCubit(shopsRepository: AddShopRepository(remoteDataSource: AddShopRemoteDatasource()))..getShopByID(shop.id!),),
+      BlocProvider(create: (context)=>ChangeRequestStatusCubit(AdminShopsRepo(adminShopsRemoteDatasource: AdminShopsRemoteDatasource())),)
     ],
 
       child: Scaffold(

@@ -33,7 +33,7 @@ class BlockUser extends StatelessWidget {
                 height: 60,
                 width: 150,
                 child: CustomButton(
-                  title: state is BlockUserLoading ? "Loading..." : "Block user",
+                  text: state is BlockUserLoading ? "Loading..." : "Block user",
                   style: const TextStyle(
                     fontSize: 16,
                     color: Color(0xff171212),
@@ -42,7 +42,7 @@ class BlockUser extends StatelessWidget {
                   onPressed: () {
                     sl<BlockUserCubit>().blockUser("4iUxe2xwauPYSe7KcRzM19ylaF32");
                   },
-                  buttonColor: AppPalette.mainColor,
+                backgroundColor: AppPalette.mainColor, borderRadius: 10,
                 ),
               );
             },

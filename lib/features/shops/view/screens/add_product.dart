@@ -106,7 +106,7 @@ class _AddProductState extends State<AddProduct> {
                     ),
                     SizedBox(height: size.height * 0.1),
                     CustomButton(
-                      title: "Add your product",
+                      text: "Add your product",
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
                           if (selectedImage == null) {
@@ -128,12 +128,12 @@ class _AddProductState extends State<AddProduct> {
                           );
                         }
                       },
-                      buttonColor: AppPalette.mainColor,
+                      backgroundColor: AppPalette.mainColor,
                       style: const TextStyle(
                         fontSize: 16,
                         color: Color(0xff171212),
                         fontWeight: FontWeight.w700,
-                      ),
+                      ), borderRadius: 10, 
                     ),
                   ],
                 ),

@@ -1,10 +1,11 @@
-import 'package:_3la_ad_el_eed/features/admin/data/data_source/shops_remote_datasource.dart';
-import 'package:_3la_ad_el_eed/features/admin/data/respository/shops_repository.dart';
 import 'package:_3la_ad_el_eed/features/admin/view/controllers/get%20shops%20cubit/get_shops_cubit.dart';
 import 'package:_3la_ad_el_eed/features/admin/view/controllers/get%20shops%20cubit/get_shops_state.dart';
 import 'package:_3la_ad_el_eed/features/admin/view/widgets/shop_item_widget.dart';
-
+import 'package:_3la_ad_el_eed/features/shops/data/data_source/add_shop_remote_datasource.dart';
+import 'package:_3la_ad_el_eed/features/shops/data/repository/add_shop_repository.dart';
+// ignore: depend_on_referenced_packages
 import 'package:flutter/material.dart';
+// ignore: depend_on_referenced_packages
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ShopsAdditionRequestsScreen extends StatelessWidget {
@@ -13,7 +14,7 @@ class ShopsAdditionRequestsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(providers: [
-      BlocProvider(create: (context)=>GetShopsCubit(shopsRepository: ShopsRepository(remoteDataSource: ShopsRemoteDataSource()))..getShops())
+      BlocProvider(create: (context)=>GetShopsCubit(shopsRepository: AddShopRepository(remoteDataSource: AddShopRemoteDatasource()))..getShops())
 
     ],
       child: Scaffold(

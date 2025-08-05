@@ -1,9 +1,9 @@
-import 'package:_3la_ad_el_eed/features/shops/data/repository/shops_repository.dart';
+import 'package:_3la_ad_el_eed/features/shops/data/repository/add_products_repository.dart';
 import 'package:_3la_ad_el_eed/features/shops/view/controllers/show_product_states.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ShowProductCubit extends Cubit<ShowProductState> {
-  final ShopsRepository shopRepository;
+  final AddProductsRepository shopRepository;
 
   ShowProductCubit({required this.shopRepository}) : super(ShowProductInitial());
 

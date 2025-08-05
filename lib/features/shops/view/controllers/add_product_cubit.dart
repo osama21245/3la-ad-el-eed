@@ -1,13 +1,12 @@
- add_product
 import 'dart:io';
-import 'package:_3la_ad_el_eed/features/shops/data/repository/shops_repository.dart';
+import 'package:_3la_ad_el_eed/features/shops/data/repository/add_products_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'add_product_state.dart';
 
-class AddProductCubit extends Cubit<AddProductState> {
-  // final ShopsRepository shopsRepository;
+// class AddProductCubit extends Cubit<AddProductState> {
+//   // final ShopsRepository shopsRepository;
 
- add_shop
+//  add_shop
 // import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:_3la_ad_el_eed/features/shops/data/repository/shops_repository.dart';
 // import 'add_product_state.dart';
@@ -40,31 +39,12 @@ class AddProductCubit extends Cubit<AddProductState> {
 //   }
 // }
 
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:_3la_ad_el_eed/features/shops/data/repository/shops_repository.dart';
-import 'add_product_state.dart';
 
 class AddProductCubit extends Cubit<AddProductState> {
- development
-  final ShopsRepository shopsRepository;
+  final AddProductsRepository shopsRepository;
 
   AddProductCubit({required this.shopsRepository})
     : super(AddProductState(status: AddProductStatus.initial));
- add_product
-  //   : super(AddProductState(status: AddProductStatus.initial));
-  //
-  // Future<void> getShops() async {
-  //   emit(state.copyWith(status: AddProductStatus.loading));
-  //
-  //   try {
-  //     final shops = await shopsRepository.getShops();
-  //     emit(state.copyWith(status: AddProductStatus.success, shops: shops));
-  //   } catch (error) {
-  //     emit(
-  //       state.copyWith(status: AddProductStatus.error, error: error.toString()),
-  //     );
-  //   }
-  // }
 
   Future<void> addProduct({
     required String name,
@@ -89,21 +69,20 @@ class AddProductCubit extends Cubit<AddProductState> {
       emit(state.copyWith(status: AddProductStatus.error, error: e.toString()));
     }
   }
+
 }
+  //   Future<void> getShops() async {
+  //   emit(state.copyWith(status: AddProductStatus.loading));
+
+  //   try {
+  //     final shops = await shopsRepository.getShops();
+  //     emit(state.copyWith(status: AddProductStatus.success, shops: shops));
+  //   } catch (error) {
+  //     emit(
+  //       state.copyWith(status: AddProductStatus.error, error: error.toString()),
+  //     );
+  //   }
+  // }
 
 
-  Future<void> getShops() async {
-    emit(state.copyWith(status: AddProductStatus.loading));
 
-    try {
-      final shops = await shopsRepository.getShops();
-      emit(state.copyWith(status: AddProductStatus.success, shops: shops));
-    } catch (error) {
-      emit(
-        state.copyWith(status: AddProductStatus.error, error: error.toString()),
-      );
-    }
-  }
-}
- development
- development

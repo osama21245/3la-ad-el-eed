@@ -1,8 +1,6 @@
-
-import 'package:_3la_ad_el_eed/features/shops/data/data_source/shops_remote_datasource.dart';
-import 'package:_3la_ad_el_eed/features/shops/data/repository/shops_repository.dart';
+import 'package:_3la_ad_el_eed/features/shops/data/data_source/add_shop_remote_datasource.dart';
+import 'package:_3la_ad_el_eed/features/shops/data/repository/add_shop_repository.dart';
 import 'package:_3la_ad_el_eed/features/shops/view/controllers/add%20shops%20cubit/add_shop_cubit.dart';
-import 'package:_3la_ad_el_eed/features/shops/view/controllers/pick%20image%20cubit/pick_image_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../widgets/add_shop_form_widget.dart';
@@ -14,7 +12,7 @@ class AddShopScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(providers: [
 
-      BlocProvider(create: (context)=>AddShopCubit(shopsRepository: ShopsRepository(remoteDataSource: ShopsRemoteDataSource()))),
+      BlocProvider(create: (context)=>AddShopCubit(shopsRepository: AddShopRepository(remoteDataSource: AddShopRemoteDatasource()))),
     ],
       child: Scaffold(
         appBar: AppBar(

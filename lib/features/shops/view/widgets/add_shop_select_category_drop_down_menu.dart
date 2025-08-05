@@ -18,7 +18,7 @@ String? newValue;
 
           fillColor: Color(0xffF5F2F2),
           filled: true,
-          hint: Text('Select Shop Category'),
+          hintText: 'Select Shop Category',
           hintStyle: TextStyle(
             fontFamily: 'PlusJakartaSans',
             fontWeight: FontWeight.w400,

@@ -1,16 +1,16 @@
-import 'package:_3la_ad_el_eed/features/admin/data/respository/shops_repository.dart';
+import 'package:_3la_ad_el_eed/features/admin/data/repository/admin_shops_repo.dart';
 import 'package:_3la_ad_el_eed/features/admin/view/controllers/change%20request%20status%20cubit/change_request_status_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../data/models/shop.dart';
 
 class ChangeRequestStatusCubit extends Cubit<ChangeRequestStatusState> {
-  ChangeRequestStatusCubit(this.shopsRepository)
+  ChangeRequestStatusCubit(this.adminShopsRepo)
     : super(ChangeRequestStatusState(status: ChangeRequestStatus.initial));
-  final ShopsRepository shopsRepository;
+  final AdminShopsRepo adminShopsRepo;
   Future<void> acceptRequestStatus(Shop shop) async {
     emit(state.copyWith(status: ChangeRequestStatus.loading));
-    final result = await shopsRepository.acceptRequestStatus(shop);
+    final result = await adminShopsRepo.acceptRequestStatus(shop);
     result.fold(
       (error) {
         emit(
@@ -56,7 +56,7 @@ class ChangeRequestStatusCubit extends Cubit<ChangeRequestStatusState> {
 
   Future<void> rejectRequestStatus(Shop shop, String adminMessage) async {
     emit(state.copyWith(status: ChangeRequestStatus.loading));
-    final result = await shopsRepository.rejectRequestStatus(
+    final result = await adminShopsRepo.rejectRequestStatus(
       shop,
       adminMessage,
     );

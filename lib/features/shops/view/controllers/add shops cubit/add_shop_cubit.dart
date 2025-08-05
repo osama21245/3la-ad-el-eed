@@ -1,12 +1,12 @@
 import 'dart:io';
 
+import 'package:_3la_ad_el_eed/features/shops/data/repository/add_shop_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../data/models/shop.dart';
-import '../../../data/repository/shops_repository.dart';
 import 'add_shop_state.dart';
 
 class AddShopCubit extends Cubit<AddShopState> {
-  final ShopsRepository shopsRepository;
+  final AddShopRepository shopsRepository;
 
   AddShopCubit({required this.shopsRepository}) : super(AddShopState.initial());
 
