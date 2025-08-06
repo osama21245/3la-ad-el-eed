@@ -4,7 +4,7 @@ class CreateZoneOnMapRepo {
   CreateZoneOnMapRepo({required this.firestoreService});
   final FirestoreService firestoreService;
 
-  Future<void> fetchZone({required data}) async {
+  Future<void> addZone({required data}) async {
     try {
       await firestoreService.addData(collectionPath: 'zones', data: data);
       print('zone added successfully');
