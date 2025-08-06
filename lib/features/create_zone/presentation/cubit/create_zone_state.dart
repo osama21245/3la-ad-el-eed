@@ -1,32 +1,39 @@
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+
 enum CreateZoneOnMapStatus { initial, loading, success, error }
 
-extension CreateZoneOnMapExtention on CreateZoneOnMapState {
-  bool get isInitial => state == CreateZoneOnMapStatus.initial;
-  bool get isLoading => state == CreateZoneOnMapStatus.loading;
-  bool get isSuccess => state == CreateZoneOnMapStatus.success;
-  bool get isError => state == CreateZoneOnMapStatus.error;
-}
-
 class CreateZoneOnMapState {
-  final CreateZoneOnMapStatus state;
+  final CreateZoneOnMapStatus status;
   final String? error;
+  final Set<Marker> markers;
+  final List<LatLng> polylinePoints;
+  final Polygon? polygon;
+  final String? zoneName;
 
-  CreateZoneOnMapState({required this.state, this.error});
-
-  factory CreateZoneOnMapState.initial() {
-    return CreateZoneOnMapState(
-      state: CreateZoneOnMapStatus.initial,
-      error: '',
-    );
-  }
+  const CreateZoneOnMapState({
+    this.status = CreateZoneOnMapStatus.initial,
+    this.error,
+    this.markers = const {},
+    this.polylinePoints = const [],
+    this.polygon,
+    this.zoneName,
+  });
 
   CreateZoneOnMapState copyWith({
     CreateZoneOnMapStatus? status,
-    String? errorMessage,
+    String? error,
+    Set<Marker>? markers,
+    List<LatLng>? polylinePoints,
+    Polygon? polygon,
+    String? zoneName,
   }) {
     return CreateZoneOnMapState(
-      state: status ?? state,
-      error: errorMessage ?? error,
+      status: status ?? this.status,
+      error: error ?? this.error,
+      markers: markers ?? this.markers,
+      polylinePoints: polylinePoints ?? this.polylinePoints,
+      polygon: polygon,
+      zoneName: zoneName ?? this.zoneName,
     );
   }
 }
