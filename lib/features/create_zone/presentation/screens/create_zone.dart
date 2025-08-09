@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:_3la_ad_el_eed/features/create_zone/data/repo/create_zone.dart';
 import 'package:_3la_ad_el_eed/features/create_zone/presentation/cubit/create_zone_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,7 +7,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../cubit/create_zone_cubit.dart';
 
 class CreateZoneOnMapScreen extends StatefulWidget {
-  const CreateZoneOnMapScreen({super.key});
+  const CreateZoneOnMapScreen({super.key, required CreateZoneOnMapRepo createZoneOnMapRepo});
 
   @override
   State<CreateZoneOnMapScreen> createState() => _CreateZoneOnMapScreenState();

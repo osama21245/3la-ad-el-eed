@@ -51,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ScaffoldMessenger.of(
                     context,
                   ).showSnackBar(SnackBar(content: Text("Login Success")));
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>ReviewingResultScreen()));
+                  // Navigator.push(context, MaterialPageRoute(builder: (context)=>ReviewingResultScreen()));
                 } else {
                   //loading state
                 }

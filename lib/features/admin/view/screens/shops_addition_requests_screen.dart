@@ -15,7 +15,6 @@ class ShopsAdditionRequestsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(providers: [
       BlocProvider(create: (context)=>GetShopsCubit(shopsRepository: AddShopRepository(remoteDataSource: AddShopRemoteDatasource()))..getShops())
-
     ],
       child: Scaffold(
         backgroundColor: Colors.white,
